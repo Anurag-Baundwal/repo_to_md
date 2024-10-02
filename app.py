@@ -1,10 +1,12 @@
 import os
+from datetime import datetime
 
 def process_folder(folder_path):
     if not os.path.isdir(folder_path):  # Check if the provided path is a valid directory
         return 'Invalid directory. Please enter a valid folder path.'
-    
-    md_content = '# Code Files in Folder\n\n'  # Start the markdown file content with a header
+
+    folder_name = os.path.basename(folder_path)  # Get the folder name from the path
+    md_content = f'# Code Files in Folder {folder_name}\n\n'  # Include the folder name in the header
 
     # Define a list of file extensions for various programming languages
     valid_extensions = (
@@ -32,8 +34,15 @@ def process_folder(folder_path):
             except Exception as e:
                 md_content += f'\n**Error reading file {file}: {str(e)}**\n\n'
 
-    # Write the markdown content to a file
-    output_path = os.path.join(folder_path, 'code_summary.md')
+    # Generate a filename with a timestamp if 'code_summary.md' already exists
+    output_filename = 'code_summary.md'
+    output_path = os.path.join(folder_path, output_filename)
+
+    if os.path.exists(output_path):
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')  # Get current timestamp
+        output_filename = f'code_summary_{timestamp}.md'
+        output_path = os.path.join(folder_path, output_filename)
+
     try:
         with open(output_path, 'w', encoding='utf-8') as md_file:
             md_file.write(md_content)  # Save the markdown file

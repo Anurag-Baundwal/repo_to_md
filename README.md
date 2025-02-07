@@ -10,6 +10,7 @@
 - Supports a wide range of file extensions across multiple programming languages.
 - Automatically includes the folder name in the header of the generated Markdown file.
 - Ensures that existing markdown files are not overwritten by appending a timestamp to the output file if a file with the name `code_summary.md` already exists.
+- Excludes previously generated `code_summary.md` files from being included in subsequent runs.
 
 ## Supported File Types
 

@@ -7,14 +7,20 @@
 ## Features
 
 - Processes only the root folder (no subfolders).
-- Supports a wide range of file extensions across multiple programming languages.
+- Supports a wide range of file extensions across multiple programming languages (see below).
+- **Includes specific configuration and build files by name** (e.g., `Makefile`, `.gitignore`, `BUILD`) even if they lack a standard extension.
+- **Adds language hints to Markdown code blocks** for improved syntax highlighting in compatible viewers.
 - Automatically includes the folder name in the header of the generated Markdown file.
 - Ensures that existing markdown files are not overwritten by appending a timestamp to the output file if a file with the name `code_summary.md` already exists.
 - Excludes previously generated `code_summary.md` files from being included in subsequent runs.
 
-## Supported File Types
+## Supported File Types and Specific Files
 
-The script currently supports the following file types:
+The script includes files based on two criteria:
+
+**1. By Extension:**
+
+The script currently supports the following file types based on their extensions:
 
 - Python (`.py`)
 - JavaScript (`.js`)
@@ -45,6 +51,20 @@ The script currently supports the following file types:
 - Assembly (`.s`)
 - Config files (`.ini`, `.toml`, `.yaml`, `.yml`, `.json`)
 - Documentation (`.md`, `.rst`)
+
+**2. By Specific Filename:**
+
+Regardless of extension, the script also includes the following files if found (matching is case-sensitive):
+
+- `BUILD`
+- `.bazelrc`
+- `.gitignore`
+- `makefile`
+- `WORKSPACE`
+- `gpp_build.sh`
+
+
+*(Note: The generated Markdown will attempt to add appropriate syntax highlighting hints for these files as well, e.g., `bazel` for `BUILD`/`WORKSPACE`, `gitignore` for `.gitignore`, `makefile` for `makefile`)*
 
 ## Installation
 
